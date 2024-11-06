@@ -1,0 +1,202 @@
+void stClausAuto(HDC hdc, int x, int y) {
+    MoveToEx(hdc, 20 + x, 0 + y, NULL);
+    LineTo(hdc, 30 + x, 20 + y);
+    LineTo(hdc, 10 + x, 20 + y);
+    LineTo(hdc, 20 + x, 0 + y);
+
+    MoveToEx(hdc, 20 + x, 10 + y, NULL);
+    LineTo(hdc, 30 + x, 40 + y);
+    LineTo(hdc, 10 + x, 40 + y);
+    LineTo(hdc, 20 + x, 10 + y);
+
+    MoveToEx(hdc, 20 + x, 30 + y, NULL);
+    LineTo(hdc, 40 + x, 80 + y);
+    LineTo(hdc, 0 + x, 80 + y);
+    LineTo(hdc, 20 + x, 30 + y);
+
+
+}
+void drawTruck(HDC hdc, int x, int y) {
+    HPEN hPen = CreatePen(PS_SOLID, 4, RGB(0, 0, 200));
+    SelectObject(hdc, hPen);
+
+    Rectangle(hdc, 0 + x, 30 + y, 40 + x, 50 + y);
+    Rectangle(hdc, 10 + x, 10 + y, 40 + x, 30 + y);
+    Rectangle(hdc, 40 + x, 0 + y, 100 + x, 50 + y);
+
+    hPen = CreatePen(PS_SOLID, 4, RGB(100, 0, 0));
+    SelectObject(hdc, hPen);
+    Ellipse(hdc, 10 + x, 40 + y, 30 + x, 60 + y);
+    Ellipse(hdc, 70 + x, 40 + y, 90 + x, 60 + y);
+}
+void drawTrucks1(HDC hdc) {
+    drawTruck(hdc, 10, 10);
+    drawTruck(hdc, 10, 310);
+    drawTruck(hdc, 310, 10);
+    drawTruck(hdc, 310, 310);
+    drawTruck(hdc, 160, 160);
+
+}
+void drawTrucks2(HDC hdc) {
+    int x = 0;
+    int y = 50;
+    do {
+        drawTruck(hdc, x, 0);
+        x += 110;
+
+    } while (x < 600);
+}
+
+void drawTrucks3(HDC hdc) {
+    int y = 0;
+
+    do {
+        drawTruck(hdc, 0, y);
+        y += 90;
+
+    } while (y < 500);
+
+}
+void drawTrucks4(HDC hdc) {
+    int y = 0;
+    int x = 0;
+    do {
+        drawTruck(hdc, x, y);
+        y += 90;
+        x += 130;
+    } while (x < 700 && y < 500);
+
+}
+void drawLexus(HDC hdc, int x, int y) {
+    HPEN hLexus = CreatePen(PS_SOLID, 3, RGB(0, 0, 0));
+    SelectObject(hdc, hLexus);
+    Ellipse(hdc, 45 + x, 45 + y, 180 + x, 135 + y);
+    MoveToEx(hdc, 135 + x, 50 + y, NULL);
+    LineTo(hdc, 90 + x, 108 + y);
+    LineTo(hdc, 171 + x, 108 + y);
+}
+void drawLexus1(HDC hdc) {
+    drawLexus(hdc, 10, 10);
+    drawLexus(hdc, 10, 310);
+    drawLexus(hdc, 310, 10);
+    drawLexus(hdc, 310, 310);
+    drawLexus(hdc, 160, 160);
+}
+void drawLexus2(HDC hdc) {
+    int x = 0;
+    int y = 50;
+    do {
+        drawLexus(hdc, x, 0);
+        x += 150;
+
+    } while (x < 800);
+}
+void drawLexus3(HDC hdc) {
+    int y = 0;
+
+    do {
+        drawLexus(hdc, 0, y);
+        y += 120;
+
+    } while (y <400);
+
+}
+void drawLexus4(HDC hdc) {
+    int y = 0;
+    int x = 0;
+    do {
+        drawLexus(hdc, x, y);
+        y += 110;
+        x += 150;
+    } while (x < 800 && y < 400);
+
+}
+//  ФУНКЦИЯ: WndProc(HWND, UINT, WPARAM, LPARAM)
+//
+//  ЦЕЛЬ: Обрабатывает сообщения в главном окне.
+//
+//  WM_COMMAND  - обработать меню приложения
+//  WM_PAINT    - Отрисовка главного окна
+//  WM_DESTROY  - отправить сообщение о выходе и вернуться
+//
+//
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message)
+    {
+    case WM_COMMAND:
+    {
+        int wmId = LOWORD(wParam);
+        // Разобрать выбор в меню:
+        switch (wmId)
+        {
+        case IDM_ABOUT:
+            DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+            break;
+        case IDM_EXIT:
+            DestroyWindow(hWnd);
+            break;
+        default:
+            return DefWindowProc(hWnd, message, wParam, lParam);
+        }
+    }
+    break;
+    case WM_PAINT:
+    {
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hWnd, &ps);
+        // TODO: Добавьте сюда любой код прорисовки, использующий HDC...
+
+        //1.1
+        //stClausAuto(hdc, 0, 0);
+        //stClausAuto(hdc, 200, 200);
+        //stClausAuto(hdc, 100, 100);
+        //stClausAuto(hdc, 0, 200);
+        //stClausAuto(hdc, 200, 0);
+
+
+        //1.2
+        //int x = 0;
+        //do {
+        //    stClausAuto(hdc, x, 0);
+        //    x += 50;
+        //} while (x < 400);
+
+
+
+        //1.3
+        //int y = 0;
+        //do {
+        //    stClausAuto(hdc, 0, y);
+        //    y += 90;
+        //} while (y < 300);
+
+
+
+        //1.4
+        //int y = 0;
+        //int x = 0;
+        //do {
+        //    stClausAuto(hdc, x, y);
+        //    y += 90;
+        //    x += 50;
+        //} while (x < 400 && y < 300);
+
+
+        //2.2-2.5
+        //drawTrucks1(hdc);
+        //drawTrucks2(hdc);
+        //drawTrucks3(hdc);
+        //drawTrucks4(hdc);
+
+
+
+        //drawLexus1(hdc);
+      //drawLexus2(hdc);
+      //drawLexus3(hdc);
+        drawLexus4(hdc);
+
+
+        EndPaint(hWnd, &ps);
+    }
+    break;

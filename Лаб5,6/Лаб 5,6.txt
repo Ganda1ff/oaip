@@ -1,0 +1,196 @@
+ case WM_PAINT:
+        {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hWnd, &ps);
+            
+            //земля
+            HPEN hGround;
+            hGround = CreatePen(PS_SOLID, 3, RGB(34, 139, 34));
+            SelectObject(hdc, hGround);
+
+            MoveToEx(hdc, 0, 525, NULL);
+            LineTo(hdc, 1400, 525);
+            
+
+            //дом
+            HPEN hHouse;
+            hHouse = CreatePen(PS_SOLID, 3, RGB(200, 162, 200));
+            SelectObject(hdc, hHouse);
+            MoveToEx(hdc, 150, 350, NULL);
+            LineTo(hdc, 275, 250);
+            LineTo(hdc, 400, 350);
+
+
+            LineTo(hdc, 400, 525);
+            LineTo(hdc, 150, 525);
+            LineTo(hdc, 150, 350);
+            LineTo(hdc, 400, 350);
+
+            MoveToEx(hdc, 225, 400, NULL);
+            LineTo(hdc, 225, 475);
+            LineTo(hdc, 325, 475);
+            LineTo(hdc, 325, 400);
+            LineTo(hdc, 225, 400);
+
+            MoveToEx(hdc, 275, 400, NULL);
+            LineTo(hdc, 275, 475);
+            MoveToEx(hdc, 275, 425, NULL);
+            LineTo(hdc, 325, 425);
+
+            //елкa
+            HPEN hEve;
+            hEve = CreatePen(PS_SOLID, 3, RGB(45, 87, 44));
+            SelectObject(hdc, hEve);
+
+            MoveToEx(hdc,450,525,NULL);
+            LineTo(hdc, 525, 450);
+            LineTo(hdc, 600, 525);
+            LineTo(hdc, 450, 525);
+
+            MoveToEx(hdc, 575,450,NULL);
+            LineTo(hdc, 525, 400);
+            LineTo(hdc, 475, 450);
+            LineTo(hdc, 575, 450);
+
+            MoveToEx(hdc, 550, 400, NULL);
+            LineTo(hdc, 525, 375);
+            LineTo(hdc, 500, 400);
+            LineTo(hdc, 550, 400);
+
+            //машина
+            HBRUSH hBrush;
+            HPEN hPen = CreatePen(PS_SOLID, 3, RGB(128, 0, 0));
+            SelectObject(hdc, hPen);
+
+            
+            hBrush = CreateSolidBrush(RGB(255, 126, 54));
+            SelectObject(hdc, hBrush);
+
+            Rectangle(hdc, 700,450, 950, 500);
+
+            MoveToEx(hdc, 750, 450, NULL);
+            LineTo(hdc, 800, 400);
+            LineTo(hdc, 900, 400);
+            LineTo(hdc, 950, 450);
+
+            hPen = CreatePen(PS_SOLID, 5, RGB(0, 0, 128));
+            SelectObject(hdc, hPen);
+
+            hBrush = CreateHatchBrush(HS_FDIAGONAL, RGB(255, 0, 0));
+            SelectObject(hdc, hBrush);
+
+            Ellipse(hdc, 725,475,775, 525);
+
+            hPen = CreatePen(PS_SOLID, 5, RGB(0, 128,0));
+            SelectObject(hdc, hPen);
+
+            hBrush = CreateHatchBrush(HS_FDIAGONAL, RGB(255, 225, 0));
+            SelectObject(hdc, hBrush);
+
+            Ellipse(hdc,875, 475, 925, 525);
+
+            //дерево
+            HPEN hTree;
+            hTree= CreatePen(PS_SOLID, 3, RGB(45, 87, 44));
+            SelectObject(hdc, hTree);
+
+            MoveToEx(hdc, 75, 525, NULL);
+            LineTo(hdc, 75,325);
+            MoveToEx(hdc, 75, 500, NULL);
+            LineTo(hdc,100, 475);
+
+            MoveToEx(hdc, 75, 475, NULL);
+            LineTo(hdc, 25, 450);
+            MoveToEx(hdc, 75, 450, NULL);
+            LineTo(hdc,115, 425);
+            MoveToEx(hdc, 75, 425, NULL);
+            LineTo(hdc, 20, 400);
+            MoveToEx(hdc, 75, 375, NULL);
+            LineTo(hdc, 95, 350);
+
+
+            //транспортное средство
+            HBRUSH hcar1;
+            hcar1 = CreateSolidBrush(RGB(225, 235, 245));
+            SelectObject(hdc, hcar1);
+            Rectangle(hdc, 1050, 350, 1175, 500);
+
+            HBRUSH hcar2;
+            hcar2 = CreateSolidBrush(RGB(15, 114, 113));
+            SelectObject(hdc, hcar2);
+            Rectangle(hdc, 1175, 440, 1400, 500);
+
+
+            HBRUSH hcar3;
+            hcar3 = CreateSolidBrush(RGB(255, 255, 255));
+            SelectObject(hdc, hcar3);
+            Rectangle(hdc, 1050, 350, 1125, 425);
+
+            Ellipse(hdc, 1075,460, 1140, 525);
+            Ellipse(hdc, 1275, 475, 1325, 525);
+            Ellipse(hdc, 1325, 475, 1375, 525);
+
+            //6.1
+
+            int x1 = 400, y1 = 150;
+            int x2 = 500, y2 = 250;
+            do {
+                MoveToEx(hdc, x1, y1, NULL);
+                LineTo(hdc, x2, y2);
+
+                x1 += 30;
+
+            } while (x1 <= 600);
+
+            //6.5
+            int x3 = 25, y3 = 525;
+
+            int x4 = 25, y4 = 500;
+
+            do {
+                MoveToEx(hdc, x3, y3, NULL);
+                LineTo(hdc, x4, y4);
+
+                x3+= 20;
+                x4 += 20;
+            } while (x3 <= 1400);
+
+            //6.2
+            int x5 = 0, y5 = 250;
+            int x6 = 100, y6 = 250;
+
+            do {
+                MoveToEx(hdc, x5, y5, NULL);
+                LineTo(hdc, x6, y6);
+                x5 += 25;
+                y5 -= 50;
+            } while (x5 <= 100);
+
+            x5 = 100, y5 = 50;
+            do {
+                MoveToEx(hdc, x5, y5, NULL);
+                LineTo(hdc, x6, y6);
+                x5+= 25;
+                y5 += 50;
+
+            } while (x5 <= 200);
+
+            //6.4
+            
+            int x7 =150, y7 = 0;
+
+            int x8 =150, y8 = 100;
+
+            do {
+                HPEN hFence;
+                hFence = CreatePen(PS_SOLID, 6, RGB(30, 70, 60));
+                SelectObject(hdc, hFence);
+                MoveToEx(hdc, x7, y7, NULL);
+                LineTo(hdc, x8, y8);
+
+                x7 += 25;
+                x8 += 25;
+            } while (x7 <= 450);
+
+            EndPaint(hWnd, &ps);
+        }

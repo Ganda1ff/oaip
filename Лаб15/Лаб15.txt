@@ -1,0 +1,262 @@
+#include <stdio.h>
+#include <Windows.h>
+
+
+#define MAX_N 8
+#define MAX_M 8
+#define _CRT_SECURE_NO_WARNINGS
+
+int arr[MAX_N][MAX_M] = {
+	{0 , 1, 20, 65},
+	{88, 99, 101, 52},
+	{19, 2, 6, 8},
+
+};
+int s = 3;
+int r = 4;
+
+
+void print() {
+	printf("!!! print() !!!\n");
+	for (int i = 0; i < s; i++) {
+		for (int j = 0; j < r; j++) {
+			printf("%3d ", arr[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+
+void fill10() {
+	printf(" !!! fill10 !!!\n");
+	for (int i = 0; i < s; i++) {
+		for (int j = 0; j < r; j++) {
+			arr[i][j] = i * 10 + j;
+		}
+	}
+}
+
+void zero() {
+	printf(" !!! zero !!!\n");
+	for (int i = 0; i < s; i++) {
+		for (int j = 0; j < r; j++) {
+			arr[i][j] = 0;
+		}
+	}
+}
+
+void random_fill() {
+	printf(" !!! random !!!\n");
+	for (int i = 0; i < s; i++) {
+		for (int j = 0; j < r; j++) {
+			arr[i][j] = rand() % 10;
+		}
+	}
+}
+
+void odds_x10() {
+	printf(" !!! odds_x10 !!!\n");
+	for (int i = 0; i < s; i++) {
+		for (int j = 0; j < r; j++) {
+			if (arr[i][j] % 2 == 1) {
+				arr[i][j] *= 10;
+			}
+		}
+	}
+}
+
+void divide_10() {
+	printf(" !!! divide_10 !!!\n");
+	for (int i = 0; i < s; i++) {
+		for (int j = 0; j < r; j++) {
+			if (arr[i][j] % 10 == 0) {
+				arr[i][j] = arr[i][j] / 10;
+			}
+		}
+	}
+}
+
+void deleteString(int delRow) {
+	printf("!!! deleteString(%d) !!!", delRow);
+	for (int i = delRow; i < s - 1; i++) {
+		for (int j = 0; j < r; j++) {
+			arr[i][j] = arr[i + 1][j];
+		}
+	}
+	s--;
+}
+
+void duplicate_column(int insCol) {
+
+	printf("!!! duplicate_column !!!\n");
+	for (int j = r; j > insCol; j--) {
+		for (int i = 0; i < s; i++) {
+			arr[i][j] = arr[i][j - 1];
+		}
+	}
+	r++;  
+}
+
+void keyboardInput() {
+	printf("s, r = ");
+	scanf_s("%d%d", &s, &r);
+
+	int el = s * r;
+	printf("input %d values: ", el);
+	for (int i = 0; i < s; i++) {
+		for (int j = 0; j < r; j++) {
+			scanf_s("%d", &arr[i][j]);
+		}
+	}
+}
+
+
+void save() {
+	FILE* fout;
+	errno_t err = fopen_s(&fout, "d:\\arr\\arr.txt", "wt");
+	if (err != 0 || fout == NULL) {
+		printf("File not found\n");
+		return;
+	}
+
+	fprintf(fout, "%d", s);
+	fprintf(fout, "%d\n", r);
+	for (int i = 0; i < s; i++) {
+		for (int j = 0; j < r; j++) {
+			fprintf(fout, "%d ", arr[i][j]);
+		}
+		fprintf(fout, "\n");
+		
+	}
+	fclose(fout);
+	printf("saved\n");
+	printf("\n");
+}
+
+
+void load() {
+	FILE* fin;
+	errno_t err = fopen_s(&fin, "d:\\arr\\arr.txt", "rt");
+	if (fin == NULL) {
+		printf("File not found\n");
+		return;
+	}
+
+	fscanf_s(fin, "%d", &s);
+	fscanf_s(fin, "%d", &r);
+	for (int i = 0; i < s; i++) {
+		for (int j = 0; j < r; j++) {
+			fscanf_s(fin, "%d", &arr[i][j]);
+		}
+	}
+	fclose(fin);
+
+} // -?
+
+
+void v_10() {
+	
+
+	printf("!!! v10 !!!\n");
+
+	
+	for (int j = 0; j < r; j++) {
+		int cnt = 0;
+		for (int i = 0; i < s; i++) {
+			if (arr[i][j] % 2 == 0) {
+				cnt = 1;
+				break;
+			}
+		}
+
+		if (!cnt) {
+			for (int i = 0; i < s; i++) {
+				arr[i][j] = 0;
+			}
+		}
+	}
+}
+
+void main() {
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	int n;
+
+	do {
+		print();
+
+		printf("=================\n");
+		printf("Выберите нужную операцию\n");
+		printf("1: Заполнить значениями i * 10 + j\n");
+		printf("2: Заполнить нулями\n");
+		printf("3: Заполнить случайными значениями\n");
+		printf("4: Нечетные x10\n");
+		printf("5: Кратные 10 уменьшить в 10 раз\n");
+		printf("6: Ввести массив с клавиатуры\n");
+		printf("7: Сохранить массив в файл\n");
+		printf("8: Удалить заданную строку\n");
+		printf("9: Добавить столбец\n");
+		printf("10: Загрузить массив из файла\n");
+		printf("11: Обнулить столбец, в котором нет четных элементов\n");
+		printf("\n");
+		printf("0: Выйти из программы\n");
+
+		printf("Выбранная операция >>>>>>>>\n");
+		printf("\n");
+
+		scanf_s("%d", &n);
+
+		switch (n) {
+		case 1:
+			fill10();
+			break;
+		case 2:
+			zero();
+			break;
+		case 3:
+			random_fill();
+			break;
+		case 4:
+			odds_x10();
+			break;
+		case 5:
+			divide_10();
+			break;
+		case 6:
+			keyboardInput();
+			break;
+		case 7:
+			save();
+			break;
+		case 8:
+		{
+			int num;
+			printf("Delete = ");
+			
+			scanf_s("%d", &num);
+			deleteString(num);
+
+		}
+		break;
+		case 9:
+		{
+			int col;
+			printf("Индекс столбца для дублирования: ");
+			scanf_s("%d", &col);
+			duplicate_column(col);
+		}
+		break;
+		case 10:
+		
+			load();
+			break;
+
+		case 11:
+			v_10();
+			break;
+		}
+		
+
+	} while (n != 0);
+}

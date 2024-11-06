@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <Windows.h>
+
+void aboutMe() {
+	printf("Ротов\n");
+	printf("Иван\n");
+	printf("Павлович\n");
+	printf("\n");
+	printf("Группа: ПИбд-12\n");
+	printf("Дата: 30.09.24\n");
+	printf("Предмет: Основы программирования\n");
+	printf("Лабораторная работа 7\n");
+
+}
+
+void main(){
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
+	aboutMe();
+
+}
